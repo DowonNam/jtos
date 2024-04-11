@@ -36,6 +36,11 @@
     </div>
     <!-- 답변의 갯수 표시 -->
     <h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+    <!-- 정렬 버튼 -->
+    <div class="sorting-buttons mb-3">
+        <a href="?sort=latest" class="btn btn-outline-secondary">최신순</a>
+        <a href="?sort=popular" class="btn btn-outline-secondary">인기순</a>
+    </div>
     <!-- 답변 반복 시작 -->
     <!-- 댓글 페이징 수정 시작 -->
     <div th:with="answers=${question.answerList}, paging=${paging}">

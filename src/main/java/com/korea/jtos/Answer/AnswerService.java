@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
+
     private final AnswerRepository answerRepository;
 
     public Answer create(Question question, String content, SiteUser author){
@@ -55,6 +56,11 @@ public class AnswerService {
     public Page<Answer> getList(int questionId, int page) {
         // 답변을 createDate 기준으로 내림차순 정렬
         Pageable pageable = PageRequest.of(page, 10, Sort.by("createDate").descending());
+        return this.answerRepository.findByQuestionId(questionId, pageable);
+    }
+
+    public Page<Answer> getListSortedByVotes(int questionId, int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("votesCount").descending());
         return this.answerRepository.findByQuestionId(questionId, pageable);
     }
 }

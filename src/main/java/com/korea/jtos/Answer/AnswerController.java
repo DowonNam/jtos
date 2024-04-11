@@ -64,6 +64,18 @@ public class AnswerController {
         return String.format("redirect:/question/detail/%s#answer_%s",answer.getQuestion().getId(),answer.getId());
     }
 
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/detail/{id}")
+//    public String questionDetail(Model model, @PathVariable("id") Integer questionId, @RequestParam(defaultValue = "0") int page) {
+//        Question question = questionService.getQuestion(questionId);
+//        Page<Answer> answers = answerService.getListSortedByVotes(questionId, page);
+//
+//        model.addAttribute("question", question);
+//        model.addAttribute("answers", answers);
+//
+//        return "question_detail"; // 질문 상세 페이지 뷰 이름
+//    }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/vote/{id}")
     public String answerVote(Principal principal, @PathVariable("id") Integer id){
@@ -72,6 +84,4 @@ public class AnswerController {
         this.answerService.vote(answer,siteUser);
         return String.format("redirect:/question/detail/%s",answer.getQuestion().getId());
     }
-
-
 }
